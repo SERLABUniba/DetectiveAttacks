@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sedan:ital@0;1&display=swap');
+@import "./bootstrap.scss";
+
+.transition-element {
+  transition: opacity 0.3s ease-in-out, visibility 0.3s linear, transform 0.3s ease-in-out;
+}
+
+.first-container{
+  margin-top: 350px;
+}
+
+@media (max-width: 768px) {
+  .first-container{
+    margin-top: 150px;
+  }
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+
+
+.logo-img{
+  margin-right: 10px;
+}
+
+.btn-primary{
+  padding: 7.5px 50px;
+}
+
+.btn-danger {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  background-image: none !important;
+  color: #fff !important;
+
+  &:hover, &:focus, &:active {
+    background-color: #f1606e !important;
+    border-color: #f1606e !important;
+    background-image: none !important;
+    color: #fff !important;
+  }
+
+  &:disabled {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    background-image: none !important;
+    opacity: 0.65;
+  }
+}
+
+form{
+  caret-color: $primary;
+}
+
+/* For Chrome, Edge and Safari */
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  width: 0px;
+}
+
+.text-in-border{
+  -moz-hyphens:auto;
+  -ms-hyphens:auto;
+  -webkit-hyphens:auto;
+  hyphens:auto;
+  word-wrap:break-word;
+}
+
+.thick-vr{
+  border-left: 3px solid;
+}
+
+.margin-top-100{
+  margin-top: 100px;
+}
+
+.scrollbar{
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: $primary transparent;
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px; // Adjust this value to your liking
+    background-color: $primary;
+  }
+
+}
+
+.no-scrollbar{
+  scrollbar-width: none;
+}
+
+.btn-no-outline{
+  outline: none;
+}
+
+.fill{
+  fill: var(--bs-body-color);
+}
+
+.text-color{
+  color: var(--bs-body-color);
+}
+
+.bg-color{
+  background-color: var(--bs-body-bg);
+}
+
+.reduce-font{
+  font-size: 0.8em;
+}
+
+.bg-primary-opacity{
+  background-color: rgba($primary-bg-subtle, 0.5);
+  background-image: unset;
+}

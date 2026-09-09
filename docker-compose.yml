@@ -1,0 +1,81 @@
+version: 'v2.26.1'
+services:
+
+  web_interface:
+    build: ./webInterface
+    volumes:
+      - type: bind
+        source: ./webInterface/src
+        target: /app/src
+    #ports:
+    #  - "80:3001"
+    networks:
+      - app_network
+
+  stix_and_vulnerability:
+    build: 
+      context: ./stix&vulnerability
+      dockerfile: Dockerfile
+      args:
+        - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
+        - AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT}
+        - AZURE_OPENAI_MODEL_ID=${AZURE_OPENAI_MODEL_ID}
+    env_file:
+    - .env
+    volumes:
+        - type: bind
+          source: ./stix&vulnerability
+          target: /stix&vulnerability
+    #ports:
+    #  - "5002:5002"
+    networks:
+      - app_network
+
+  cvwelib:
+    build: ./cvwelib
+    volumes:
+      - type: bind
+        source: ./cvwelib
+        target: /cvwelib
+    #ports:
+    #  - "5001:5001"
+    networks:
+      - app_network
+
+  capeclib:
+    build: ./capeclib
+    volumes:
+      - type: bind
+        source: ./capeclib
+        target: /capeclib
+    #ports:
+    #  - "5003:5003"
+    networks:
+      - app_network
+
+  vuln_score_lite:
+    build: ./vuln_score_lite
+    volumes:
+      - type: bind
+        source: ./vuln_score_lite
+        target: /app
+    #ports:
+      #- "5005:5005"
+    networks:
+      - app_network
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "8080:80"
+    networks:
+      - app_network
+    depends_on:
+      - web_interface
+      - stix_and_vulnerability
+      - cvwelib
+      - vuln_score_lite
+
+networks:
+  app_network:
+    driver: bridge

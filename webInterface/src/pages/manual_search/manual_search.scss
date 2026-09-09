@@ -1,0 +1,44 @@
+@import "../../scss/bootstrap";
+@import "../../scss/util";
+
+.custom-pagination .MuiPaginationItem-root {
+  @extend .fs-6;
+  color: $primary ;
+  font-weight: bold;
+}
+
+.search-result{
+  @extend .scrollbar;
+  overflow: auto;
+  width: 100%;
+  max-height: 70vh;
+
+}
+
+.num-rows-selector{
+  color: var(--body-color);
+  border: 2px solid $secondary;
+  background-color: transparent;
+  padding: 2px 10px;
+}
+
+.num-rows-selector:focus {
+  outline: 0;
+}
+
+:root{
+  @extend .no-scrollbar;
+}
+
+.bg-blur{
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.bg-mapping{
+  background-color: transparent;
+}
+
+#insert_cve_cwe::placeholder {
+  color: var(--body-color);
+}

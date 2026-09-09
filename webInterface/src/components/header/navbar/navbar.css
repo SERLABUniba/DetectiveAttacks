@@ -1,0 +1,11 @@
+/* *********************************
+           Toolbar Logo
+  ********************************** */
+.small-logo-container {
+  height: auto;
+  overflow: hidden;
+}
+
+.small-logo {
+  color: var(--bs-body-color);
+}/*# sourceMappingURL=navbar.css.map */
