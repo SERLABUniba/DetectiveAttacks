@@ -1,0 +1,16 @@
+import Threat from "../../../components/threat_show/Threat.jsx";
+import {fetchDataAssetAPI} from "../../../components/api/fetchAPI.jsx";
+
+const Asset = () => {
+
+    const primaryInfo = ['Name', 'Type', 'Description'];
+    const infoForCardView = ['ID','Aliases', 'Impact', 'Platforms', 'Sectors', 'Domains', 'Revoked']
+    const otherImportantInfo = ['Related Assets' ,'Related ATT&CK and ATLAS techniques'];
+
+    return (
+        <Threat primaryInfo={primaryInfo} infoForCardView={infoForCardView} otherImportantInfo={otherImportantInfo} fetchDataFunction={fetchDataAssetAPI}/>
+    )
+
+}
+
+export default Asset;

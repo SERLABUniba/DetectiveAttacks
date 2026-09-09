@@ -1,0 +1,178 @@
+@import "../../scss/bootstrap";
+@import "../../scss/util";
+
+.ma-page {
+  min-height: calc(100vh - 80px);
+}
+
+.ma-header {
+  border-bottom: 2px solid var(--bs-primary);
+  padding-bottom: 0.75rem;
+}
+
+// ── Form card ────────────────────────────────────────────────
+.ma-form-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  height: fit-content;
+  position: sticky;
+  top: 90px;
+}
+
+// ── Inputs ───────────────────────────────────────────────────
+.ma-input {
+  background: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  color: var(--bs-body-color);
+  border-radius: 8px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 3px rgba(var(--bs-primary-rgb), 0.15);
+  }
+}
+
+// ── Table ────────────────────────────────────────────────────
+.ma-table {
+  th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-top: none;
+  }
+
+  tr {
+    vertical-align: middle;
+  }
+
+  td {
+    font-size: 0.9rem;
+  }
+}
+
+.ma-row-active {
+  background: rgba(var(--bs-primary-rgb), 0.06) !important;
+}
+
+// ── ID badge ─────────────────────────────────────────────────
+.ma-id-badge {
+  font-size: 0.7rem;
+  background: var(--bs-secondary-bg);
+  color: var(--bs-secondary-color);
+  padding: 2px 6px;
+  border-radius: 4px;
+  word-break: break-all;
+}
+
+// ── Empty state ──────────────────────────────────────────────
+.ma-empty-state {
+  padding: 3rem 1rem;
+}
+
+// ── Attack Pattern Panel ─────────────────────────────────────
+.ma-ap-panel-row td {
+  padding: 0 !important;
+  border-top: none !important;
+}
+
+.ma-ap-panel {
+  border-left: 3px solid var(--bs-primary);
+  border-bottom: 1px solid var(--bs-border-color);
+  animation: slideDown 0.18s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ma-ap-panel-inner {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  min-height: 260px;
+}
+
+.ma-ap-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ma-ap-divider {
+  width: 1px;
+  background: var(--bs-border-color);
+  flex-shrink: 0;
+}
+
+.ma-ap-list {
+  flex: 1;
+  overflow-y: scroll;
+  max-height: 280px;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 8px;
+  background: var(--bs-body-bg);
+
+  // Always show scrollbar – Firefox
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+
+  // Always show scrollbar – WebKit/Blink (Chrome, Safari, Edge)
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 3px;
+  }
+}
+
+.ma-ap-item {
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid var(--bs-border-color);
+  transition: background 0.1s;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: rgba(var(--bs-primary-rgb), 0.05);
+  }
+}
+
+// ── Table Container (Scrollable) ─────────────────────────────
+.ma-table-container {
+  @extend .scrollbar;
+  overflow: auto;
+  width: 100%;
+  max-height: 70vh;
+
+  // Header sticky like in manual search
+  thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--bs-body-bg, #fff);
+    box-shadow: 0 1px 0 var(--bs-border-color);
+  }
+}
