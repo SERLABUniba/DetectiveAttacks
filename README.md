@@ -1,5 +1,34 @@
 # DetectiveAttacks
 
+## References
+
+_DetectiveAttacks: An LLM-Driven Framework for CVE-to-TTP Correlation, Threat Actor Attribution, and Context-Aware Vulnerability Management across ATT&CK and ATLAS Matrices_
+
+```
+@inproceedings{DetectiveAttacks2026,
+  author={Balzano, Nicola and Barletta, Vita Santa and Bruno, Giovanni and Caivano, Danilo and Morga, Massimiliano},
+  title={DetectiveAttacks: An LLM-Driven Framework for CVE-to-TTP Correlation, Threat Actor Attribution, and Context-Aware Vulnerability Management across ATT\&CK and ATLAS Matrices},
+  booktitle={Proceedings of the International Conference on Evolving and Adaptive Intelligent Systems (EAIS)},
+  year={2026}
+}
+```
+
+_CTI4RA: Cyber Threat Intelligence for Risk Assessment_
+
+```
+@INPROCEEDINGS{10824666,
+  author={Barletta, Vita Santa and Balzano, Nicola and Colelli, Lorenzo and Pagano, Alessandro and Piccinno, Antonio and Sohail, Qaisar},
+  booktitle={2024 International Conference on Innovation and Intelligence for Informatics, Computing, and Technologies (3ICT)},
+  title={CTI4RA: Cyber Threat Intelligence for Risk Assessment},
+  year={2024},
+  volume={},
+  number={},
+  pages={393-398},
+  keywords={Economics;Technological innovation;Prevention and mitigation;Decision making;Organizations;Probability;Cyber threat intelligence;Systems support;Safety;Informatics;Cybersecurity;CTI;vulnerability;APT;assessment},
+  doi={10.1109/3ict64318.2024.10824666}
+}
+```
+
 ## Functionality of Tool
 **DetectiveAttacks** aims to simplify the process of mitigating cyber attacks directed toward digital infrastructure through the use of tools to:
 - display all the information coming from the CTI community, through a single access point, single interface and showing all the relationships between them;
@@ -12,22 +41,27 @@ The software architetture is the following:
 
 ![alt text](./architecture.png)
 
-## GPT use
-To get the relationship between CVE/CWE to MITRE TTPs i use this algorithm:
-
+## LLM use
+To get the relationship between CVE/CWE and MITRE TTPs, the framework uses this algorithm:
 
 ![alt text](./algorithm_relationships.png)
 
-I use GPT4o deploy by azure, if you are student probably with your institutional email you have 100$ free in you azure account. So you cane deploy a model and do as mentioned below.
+The LLM is invoked **only when no deterministic mapping** exists between a vulnerability and the MITRE ATT&CK / ATLAS attack patterns. It is used for two tasks:
+- **Domain classification**: determine whether a vulnerability belongs to the Enterprise, ICS, Mobile, or ATLAS domain.
+- **TTP mapping**: identify the Attack Pattern IDs (e.g. `T1001`) that best describe how the vulnerability is exploited or what its consequences are.
 
-But to perform the query that I developed, you need to request the quota increse for you model, becouse the standar 1k token limit is too small, you must use at least 20k token limit per minute.
+The framework uses **Google Gemini** via the [`google-generativeai`](https://pypi.org/project/google-generativeai/) Python SDK. By default it uses the `gemini-2.5-flash` model, but this can be overridden.
 
-So if you would to use GPT, as i do, when the relationship is not available you need to create `.env` file in project root directory and put in it this params:
+To configure the LLM, create a `.env` file in the project root directory with:
 ```bash
-AZURE_OPENAI_API_KEY=<your-key>
-AZURE_OPENAI_ENDPOINT=<your-endpoint>
-AZURE_OPENAI_MODEL_ID=<your-deployed-model-name>
+GOOGLE_API_KEY=<your-google-ai-api-key>
+GOOGLE_AI_MODEL=gemini-2.5-flash   # optional, this is the default
 ```
+
+You can get a free API key from [Google AI Studio](https://aistudio.google.com/app/apikey).
+
+> [!NOTE]
+> DetectiveAttacks works even without the API key — the LLM is only called as a fallback when structured mappings (CVE → CWE → CAPEC → TTP) are not available. If the key is not set, those mappings will simply be skipped.
 
 ## Install
 To install **DetectiveAttacks** you must have [docker](https://docs.docker.com/get-docker/) and [docker compose](https://docs.docker.com/get-docker/) (now it's included with docker).
